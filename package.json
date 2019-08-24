@@ -8,6 +8,16 @@
     "start": "webpack-dev-server",
     "build": "NODE_ENV='production' webpack"
   },
+  "babel": {
+    "presets": [
+      "@babel/preset-env",
+      "@babel/preset-react"
+    ],
+    "plugins": [
+      "@babel/plugin-proposal-class-properties",
+      "syntax-dynamic-import"
+    ]
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
