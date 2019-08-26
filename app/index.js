@@ -20,6 +20,7 @@ class App extends React.Component {
             <Switch>
               <Route exact path='/' render={() => <Stories type='top' />} />
               <Route path='/new' render={() => <Stories type='new' />} />
+              <Route render={() => <h1>404</h1>} />
             </Switch>
           </React.Suspense>
         </div>
