@@ -1,22 +1,33 @@
 import React from 'react'
-import { fetchPopularStoryIds } from '../utils/api'
+import { fetchStoryList } from '../utils/api'
 
 export default class Stories extends React.Component {
   state = {
-    popularStories: null,
+    storyType: 'top',
+    storyList: null,
+    error: null,
   }
   
   componentDidMount () {
-    fetchPopularStoryIds()
+    let { storyType } = this.state
+
+    fetchStoryList(storyType)
       .then((data) => {
-        this.setState({ popularStories: data })
+        console.log("data", data)
+        this.setState({ storyList: data })
+      })
+      .catch((error) => {
+        console.warn('Error fetching stories: ', error)
+
+        this.setState({
+          error: `There was an error fetching the stories.`
+        })
       })
   }
 
   render() {
-    
     return (
-      <pre>{JSON.stringify(this.state.popularStories)}</pre>
+      <pre>{JSON.stringify(this.state.storyList)}</pre>
     )
   }
 }
