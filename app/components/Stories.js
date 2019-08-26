@@ -2,10 +2,11 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { fetchStoryList } from '../utils/api'
 import Loading from './Loading'
+import StoryList from './StoryList'
 
 export default class Stories extends React.Component {
   state = {
-    storyList: null,
+    stories: null,
     error: null,
   }
   
@@ -20,22 +21,22 @@ export default class Stories extends React.Component {
   }
 
   isLoading = () => {
-    const { storyList, error } = this.state
+    const { stories, error } = this.state
     
-    return !storyList && error === null
+    return !stories && error === null
   }
   
   handleFetch = () => {
     let { type } = this.props
 
     this.setState({
-      storyList: null,
+      stories: null,
       error: null,
     })
 
     fetchStoryList(type)
       .then((data) => {
-        this.setState({ storyList: data, error: null })
+        this.setState({ stories: data, error: null })
       })
       .catch((error) => {
         console.warn('Error fetching stories: ', error)
@@ -47,11 +48,15 @@ export default class Stories extends React.Component {
   }
 
   render() {
+    const { stories } = this.state
+
     if (this.isLoading()) {
       return <Loading text='Loading' />
     }
 
-    return <pre>{JSON.stringify(this.state.storyList)}</pre>
+    return (
+      <StoryList stories={stories} />
+    )
   }
 }
 
