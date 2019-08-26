@@ -8,13 +8,13 @@ const activeStyle = {
 export default function Header () {
   return (
     <nav>
-      <ul>
+      <ul className='row'>
         <li>
           <NavLink
             to='/'
             exact
             activeStyle={activeStyle}
-            className=''
+            className='link'
           >
             Top
           </NavLink>
@@ -23,7 +23,7 @@ export default function Header () {
           <NavLink
             to='/new'
             activeStyle={activeStyle}
-            className=''
+            className='link'
           >
             New
           </NavLink>

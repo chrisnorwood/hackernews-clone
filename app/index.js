@@ -14,13 +14,15 @@ class App extends React.Component {
   render() {
     return (
       <Router>
-        <Header />
-        <React.Suspense fallback={<Loading />}>
-          <Switch>
-            <Route exact path='/' render={() => <Stories type='top' />} />
-            <Route path='/new' render={() => <Stories type='new' />} />
-          </Switch>
-        </React.Suspense>
+        <div className='container'>
+          <Header />
+          <React.Suspense fallback={<Loading />}>
+            <Switch>
+              <Route exact path='/' render={() => <Stories type='top' />} />
+              <Route path='/new' render={() => <Stories type='new' />} />
+            </Switch>
+          </React.Suspense>
+        </div>
       </Router>
     )
   }
