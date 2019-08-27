@@ -32,11 +32,16 @@ function fetchStoryIds (type = 'top') {
     })
 }
 
-function fetchItemById (id) {
+export function fetchItemById (id) {
   const endpoint = `${api_url}/item/${id}.json`
 
   return fetch(endpoint)
     .then(res => res.json())
+}
+
+export function fetchComments (idArray) {
+  return Promise.all(idArray.map(fetchItemById))
+    .then(comments => removeDeleted(onlyComments(removeDead(comments))))
 }
 
 export function fetchUser (id) {

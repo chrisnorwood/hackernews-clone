@@ -23,6 +23,7 @@ class App extends React.Component {
               <Route exact path='/' render={() => <Stories type='top' />} />
               <Route path='/new' render={() => <Stories type='new' />} />
               <Route path='/user' component={User} />
+              <Route path='/story' component={Story} />
               <Route render={() => <h1>404</h1>} />
             </Switch>
           </React.Suspense>
