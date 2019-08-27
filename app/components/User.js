@@ -37,15 +37,17 @@ export default class User extends React.Component {
         {loadingUser === true
           ? <Loading text='Loading user' />
           : <React.Fragment>
-              <h1>{userData.id}</h1>
-              <div className='meta-info'>
+              <h1 className='user-title'>{userData.id}</h1>
+              <div className='meta-info user-meta-info'>
                 Joined {formatDate(userData.created)} has {userData.karma.toLocaleString()} karma
               </div>
+              <p dangerouslySetInnerHTML={{__html: userData.about}} />
             </React.Fragment>}
 
         {loadingStories === true
-          ? <Loading text='Loading stories' />
+          ? loadingUser === false && <Loading text='Loading stories' />
           : <React.Fragment>
+              <h2 className='user-h2'>Posts</h2>
               <StoryList stories={userStories} />
             </React.Fragment>}
       </React.Fragment>

@@ -49,3 +49,16 @@ nav ul li .link {
 .meta-info a {
   color: #000;
 }
+
+.user-title {
+  margin-bottom: 0px;
+}
+
+.user-meta-info {
+  margin-top: 0px;
+  margin-bottom: 15px;
+}
+
+.user-h2 {
+  margin-bottom: 5px;
+}
