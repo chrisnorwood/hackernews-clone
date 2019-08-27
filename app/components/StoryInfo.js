@@ -6,7 +6,7 @@ import { formatDate } from '../utils/helpers'
 
 export default function StoryInfo ({ author, timeStamp, commentCount, id }) {
   return (
-    <div className='story-info'>
+    <div className='meta-info'>
       By <Link to={`/user?id=${author}`}>{author}</Link> on {formatDate(timeStamp)} with <Link to={`/story?id=${id}`}>{commentCount}</Link> comments
     </div>
   )

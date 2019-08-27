@@ -1,7 +1,25 @@
 // HackerNews API Interface
 
+const api_url = `https://hacker-news.firebaseio.com/v0`
+
+function removeDead (stories) {
+  return stories.filter(Boolean).filter(({ dead }) => dead !== true)
+}
+
+function removeDeleted (stories) {
+  return stories.filter(({ deleted }) => deleted !== true)
+}
+
+function onlyComments (stories) {
+  return stories.filter(({ type }) => type === 'comment')
+}
+
+function onlyStories (stories) {
+  return stories.filter(({ type }) => type === 'story')
+}
+
 function fetchStoryIds (type = 'top') {
-  const endpoint = `https://hacker-news.firebaseio.com/v0/${type}stories.json`
+  const endpoint = `${api_url}/${type}stories.json`
 
   return fetch (endpoint)
     .then(res => res.json())
@@ -15,10 +33,23 @@ function fetchStoryIds (type = 'top') {
 }
 
 function fetchItemById (id) {
-  const endpoint = `https://hacker-news.firebaseio.com/v0/item/${id}.json`
+  const endpoint = `${api_url}/item/${id}.json`
 
   return fetch(endpoint)
     .then(res => res.json())
+}
+
+export function fetchUser (id) {
+  const endpoint = `${api_url}/user/${id}.json`
+
+  return fetch(endpoint)
+    .then(res => res.json())
+}
+
+export function fetchStoryListByIds (ids) {
+  return Promise.all(ids.map(fetchItemById))
+    .then((stories) => removeDeleted(onlyStories(removeDead(stories))))
+
 }
 
 export function fetchStoryList (type) {
@@ -28,4 +59,5 @@ export function fetchStoryList (type) {
         idList.slice(0,50).map(id => fetchItemById(id))
       )
     })
+    .then((stories) => removeDeleted(onlyStories(removeDead(stories))))
 }

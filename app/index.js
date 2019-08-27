@@ -5,6 +5,8 @@ import Loading from './components/Loading'
 import Header from './components/Header'
 
 const Stories = React.lazy(() => import('./components/Stories'))
+const Story = React.lazy(() => import('./components/Story'))
+const User = React.lazy(() => import('./components/User'))
 
 // Reset and Custom Styles
 import 'sanitize.css'
@@ -20,6 +22,7 @@ class App extends React.Component {
             <Switch>
               <Route exact path='/' render={() => <Stories type='top' />} />
               <Route path='/new' render={() => <Stories type='new' />} />
+              <Route path='/user' component={User} />
               <Route render={() => <h1>404</h1>} />
             </Switch>
           </React.Suspense>
