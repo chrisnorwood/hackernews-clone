@@ -11,6 +11,21 @@ html, body, #app {
   padding: 50px;
 }
 
+.dark {
+  color: #DADADA;
+  background: #1c2022;
+  min-height: 100%;
+}
+
+.dark a {
+  color: rgb(203, 203, 203);
+}
+
+.btn-clear {
+  border: none;
+  background: transparent;
+}
+
 nav ul li {
   padding-right: 15px;
 }
@@ -42,12 +57,20 @@ nav ul li .link {
   margin-bottom: 15px;
 }
 
-.meta-info {
+.meta-info-light {
   color: #606060;
 }
 
-.meta-info a {
+.meta-info-light a {
   color: #000;
+}
+
+.meta-info-dark {
+  color: gray;
+}
+
+.meta-info-dark a {
+  color: #bebebe;
 }
 
 .user-title {
@@ -70,6 +93,10 @@ nav ul li .link {
 
 .comment {
   margin-left: 10px;
+  background: rgba(128, 128, 128, 0.1411764705882353);
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
 }
 
 .comment-container {

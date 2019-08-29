@@ -6,6 +6,7 @@ import Loading from './Loading'
 import { Link } from 'react-router-dom'
 import { formatDate } from '../utils/helpers'
 import StoryList from './StoryList'
+import { ThemeConsumer } from '../contexts/theme'
 
 
 export default class User extends React.Component {
@@ -33,24 +34,28 @@ export default class User extends React.Component {
     const { userData, userStories, loadingUser, loadingStories } = this.state
 
     return (
-      <React.Fragment>
-        {loadingUser === true
-          ? <Loading text='Loading user' />
-          : <React.Fragment>
-              <h1 className='user-title'>{userData.id}</h1>
-              <div className='meta-info user-meta-info'>
-                Joined {formatDate(userData.created)} has {userData.karma.toLocaleString()} karma
-              </div>
-              <p dangerouslySetInnerHTML={{__html: userData.about}} />
-            </React.Fragment>}
+      <ThemeConsumer>
+        {({ theme }) => (
+          <React.Fragment>
+            {loadingUser === true
+              ? <Loading text='Loading user' />
+              : <React.Fragment>
+                  <h1 className='user-title'>{userData.id}</h1>
+                  <div className={`meta-info-${theme} user-meta-info`}>
+                    Joined {formatDate(userData.created)} has {userData.karma.toLocaleString()} karma
+                  </div>
+                  <p dangerouslySetInnerHTML={{__html: userData.about}} />
+                </React.Fragment>}
 
-        {loadingStories === true
-          ? loadingUser === false && <Loading text='Loading stories' />
-          : <React.Fragment>
-              <h2 className='user-h2'>Posts</h2>
-              <StoryList stories={userStories} />
-            </React.Fragment>}
-      </React.Fragment>
+            {loadingStories === true
+              ? loadingUser === false && <Loading text='Loading stories' />
+              : <React.Fragment>
+                  <h2 className='user-h2'>Posts</h2>
+                  <StoryList stories={userStories} />
+                </React.Fragment>}
+          </React.Fragment>
+        )}
+      </ThemeConsumer>
     )
   }
 }
